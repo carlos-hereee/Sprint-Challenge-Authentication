@@ -11,13 +11,14 @@ module.exports = (req, res, next) => {
   if(token) {
     jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
       if(err) {
-        res.status(401).json({ you: 'shall not pass!' })
+        res.status(401).json({ message: 'shall not pass!' })
       }else{
-        req.user = { username:decodedToken.username };
+        req.user = { username: decodedToken.username };
+        res.status(200)
         next();
       }
     })
   }else{
-    res.status(500).json({ message: `500 server error ${error}`})
+    res.status(500).json({ message: `500 server error`})
   }
 };

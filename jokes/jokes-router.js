@@ -5,7 +5,7 @@ const Users = require('./users-model.js');
 
 const router = require('express').Router();
 
-router.get('/', authenticate, (req, res) => {
+router.get('/',authenticate, (req, res) => {
   const requestOptions = {
     headers: { accept: 'application/json' },
   };
@@ -13,10 +13,10 @@ router.get('/', authenticate, (req, res) => {
     .then(users => {
       res.json({ users, loggedInUser: req.user.username });
     })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({message: `server 500 error ${err}`})
-    })
+    // .catch(err => {
+    //   console.log(err);
+    //   res.status(500).json({message: `server 500 error`})
+    // });
 
   axios
     .get('https://icanhazdadjoke.com/search', requestOptions)
